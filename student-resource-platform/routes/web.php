@@ -15,6 +15,7 @@ use App\Http\Controllers\Student\PomodoroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Student\ProfileController;
+use App\Http\Controllers\Student\AiChatController;
 
 // Landing page - show the static Blade page
 Route::get('/', function () {
