@@ -23,37 +23,36 @@ class SocialAuthController extends Controller
             $user = User::where('email', $googleUser->getEmail())->first();
 
             if ($user) {
+                if (!$user->google_id) {
+                    $user->update([
+                        'google_id' => $googleUser->getId(),
+                    ]);
+                }
 
-        if (!$user->google_id) {
-            $user->update([
-                'google_id' => $googleUser->getId(),
-            ]);
-        }
+                // Give existing users a default role if they don't have one
+                if (!$user->hasAnyRole(['student', 'admin'])) {
+                    $user->assignRole('student');
+                }
+            } else {
+                $user = User::create([
+                    'name'      => $googleUser->getName(),
+                    'email'     => $googleUser->getEmail(),
+                    'google_id' => $googleUser->getId(),
+                    'password'  => bcrypt(Str::random(24)),
+                ]);
 
-        // Give existing users a default role if they don't have one
-        if (!$user->hasAnyRole(['student', 'admin'])) {
-            $user->assignRole('student');
-        }
-
-    } else {
-
-        $user = User::create([
-            'name'      => $googleUser->getName(),
-            'email'     => $googleUser->getEmail(),
-            'google_id' => $googleUser->getId(),
-            'password'  => bcrypt(Str::random(24)),
-        ]);
-
-        $user->assignRole('student');
-    }
-
-            Auth::login($user);
-
-            if ($user->hasRole('admin')) {
-                return redirect()->route('admin.dashboard');
+                $user->assignRole('student');
             }
 
-            return redirect()->route('student.dashboard');
+            Auth::login($user, true);
+            request()->session()->regenerate();
+
+            dd([
+                'Auth::check()' => Auth::check(),
+                'Auth::id()' => Auth::id(),
+                'roles' => $user->getRoleNames()->toArray(),
+                'session_id' => session()->getId(),
+            ]);
 
         } catch (\Exception $e) {
             return redirect()->route('login')
