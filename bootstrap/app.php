@@ -24,10 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->web(append: [
-            \App\Http\Middleware\EnsureValidSession::class,
-            \App\Http\Middleware\HandleInertiaRequests::class,
-            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
-        ]);
+    \App\Http\Middleware\HandleInertiaRequests::class,
+    \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+    ]);
 
         // FIX: Role-based redirect for already-authenticated users
         $middleware->redirectUsersTo(function (Request $request) {
