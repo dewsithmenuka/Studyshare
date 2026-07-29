@@ -25,16 +25,9 @@ class AuthenticatedSessionController extends Controller
 {
     $request->authenticate();
 
-    // Refresh the user and login (like Google does)
-        Auth::login($user);
+    $request->session()->regenerate();
 
-        request()->session()->regenerate();
-
-        dd([
-            'auth' => Auth::check(),
-            'user' => Auth::user(),
-            'session_id' => session()->getId(),
-        ]);
+    $user = Auth::user();
 
     if ($user->hasRole('admin')) {
         return redirect()->intended(route('admin.dashboard'));

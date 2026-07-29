@@ -3,50 +3,58 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
-class AuthenticatedSessionController extends Controller
+class SocialAuthController extends Controller
 {
-    public function create(): Response
+    public function redirectToGoogle()
     {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
+        return Socialite::driver('google')->redirect();
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function handleGoogleCallback()
     {
-        // Authenticate the credentials
-        $request->authenticate();
+        try {
+            $googleUser = Socialite::driver('google')->user();
 
-        // Regenerate session
-        $request->session()->regenerate();
+            $user = User::where('email', $googleUser->getEmail())->first();
 
-        // Get the logged in user
-        $user = Auth::user();
+            if ($user) {
+                if (!$user->google_id) {
+                    $user->google_id = $googleUser->getId();
+                    $user->save();
+                }
 
-        // Redirect according to role
-        if ($user->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
+                if (!$user->hasAnyRole(['student', 'admin'])) {
+                    $user->assignRole('student');
+                }
+            } else {
+                $user = User::create([
+                    'name'      => $googleUser->getName(),
+                    'email'     => $googleUser->getEmail(),
+                    'google_id' => $googleUser->getId(),
+                    'password'  => bcrypt(Str::random(24)),
+                ]);
+
+                $user->assignRole('student');
+            }
+
+            Auth::login($user, true);
+
+            request()->session()->regenerate();
+
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            return redirect()->route('student.dashboard');
+
+        } catch (\Throwable $e) {
+            return redirect()->route('login')
+                ->with('error', 'Google login failed: '.$e->getMessage());
         }
-
-        return redirect()->route('student.dashboard');
-    }
-
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }
