@@ -310,8 +310,6 @@ Examples include:
 
 #  Screenshots
 
-> Replace the placeholders below with screenshots from your application.
-
 <img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/7ce80aea-640a-41e5-b703-9d81e8986d52" />
 <img width="972" height="544" alt="image" src="https://github.com/user-attachments/assets/9923268f-232d-4c4f-b19f-839bc2b9eded" />
 <img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/a7f81358-6fe7-4054-98d4-e74d97aa2e9c" />
