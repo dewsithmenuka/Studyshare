@@ -312,20 +312,21 @@ Examples include:
 
 > Replace the placeholders below with screenshots from your application.
 
-* Home Page
-* Login Page
-* Student Dashboard
-* Upload Resource
-* Browse Resources
-* Library
-* AI Chat
-* AI Analyzer
-* Study Groups
-* Profile
-* Contact
-* Admin Dashboard
-* User Management
-* Resource Approval
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/7ce80aea-640a-41e5-b703-9d81e8986d52" />
+<img width="972" height="544" alt="image" src="https://github.com/user-attachments/assets/9923268f-232d-4c4f-b19f-839bc2b9eded" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/a7f81358-6fe7-4054-98d4-e74d97aa2e9c" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/fcef79e4-47fa-4095-baa7-eb4fe677e391" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/60b42d4c-3d83-4104-896e-db0b1bee2c49" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/ac810cd0-5c13-4518-a700-24241a7298a5" />
+<img width="972" height="544" alt="image" src="https://github.com/user-attachments/assets/ffce996e-445d-4a60-a5a7-a78f60dd201c" />
+<img width="972" height="544" alt="image" src="https://github.com/user-attachments/assets/bf727e0f-9dc6-4f89-90e5-474aadf6a875" />
+<img width="970" height="540" alt="image" src="https://github.com/user-attachments/assets/ab99dd4b-9a13-4278-97ee-a6ecfd223c6f" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/23c85cc3-203c-40df-b1ff-8e86b2e195a0" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/75c49591-959b-4f13-a457-6623199e0cfa" />
+<img width="970" height="542" alt="image" src="https://github.com/user-attachments/assets/8d9a481a-3fd5-4336-9e78-844f6cb2a77c" />
+<img width="972" height="536" alt="image" src="https://github.com/user-attachments/assets/c03cdede-d9c4-45ba-880b-c1457f4ffd03" />
+<img width="972" height="542" alt="image" src="https://github.com/user-attachments/assets/9e61cb71-d7b5-42e5-b000-5f01a71844f9" />
+<img width="972" height="540" alt="image" src="https://github.com/user-attachments/assets/e4b77966-d948-4115-b4fa-abe66f675d77" />
 
 
 
